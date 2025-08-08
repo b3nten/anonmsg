@@ -1,0 +1,14 @@
+# GoDoIt Server Configuration - Development
+# Application-specific settings for development environment
+# Deployment settings (port, database_url) are handled via environment variables
+
+# Logging Configuration
+log_level: "debug"
+log_format: "text"
+
+# Feature Flags
+enable_debug_endpoints: true
+enable_metrics: false
+enable_docs: true
+allowed_methods: ["HEAD", "GET", "POST", "DELETE"]
+allowed_origins: ["*"]
