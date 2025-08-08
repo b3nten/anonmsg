@@ -1,23 +1,23 @@
 <script lang="ts">
-  import api from "$lib";
-  import { goto } from "$app/navigation";
-  import {
-    TerminalBlock,
-    TerminalButton,
-    TerminalPrompt,
-    TerminalSection,
-    ApiEndpoint,
-    Nav,
-  } from "$lib/landing";
+import api from "$lib";
+import { goto } from "$app/navigation";
+import {
+	TerminalBlock,
+	TerminalButton,
+	TerminalPrompt,
+	TerminalSection,
+	ApiEndpoint,
+	Nav,
+} from "$lib/landing";
 
-  let create_inbox = async () => {
-    let response = await api().POST("/v1/inbox/");
-    if (response.error) {
-      alert(response.error.title);
-    } else {
-      goto("/inbox/" + response.data.private_key);
-    }
-  };
+let create_inbox = async () => {
+	let response = await api().POST("/v1/inbox/");
+	if (response.error) {
+		alert(response.error.title);
+	} else {
+		goto("/inbox/" + response.data.private_key);
+	}
+};
 </script>
 
 <Nav />

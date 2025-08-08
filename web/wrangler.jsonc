@@ -1,12 +1,12 @@
 {
- "name": "anonmsg",
- "main": ".svelte-kit/cloudflare/_worker.js",
- "compatibility_date": "2025-08-03",
- "assets": {
-  "binding": "ASSETS",
-  "directory": ".svelte-kit/cloudflare",
- },
- "vars": {
-  "PUBLIC_API_URL": "https://api.anonmsg.dev",
- },
+	"name": "anonmsg",
+	"main": ".svelte-kit/cloudflare/_worker.js",
+	"compatibility_date": "2025-08-03",
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".svelte-kit/cloudflare"
+	},
+	"vars": {
+		"PUBLIC_API_URL": "https://api.anonmsg.dev"
+	}
 }

@@ -1,5 +1,5 @@
 <script>
-    import Nav from "$lib/landing/Nav.svelte";
+import Nav from "$lib/landing/Nav.svelte";
 </script>
 
 <Nav />

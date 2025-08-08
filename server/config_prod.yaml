@@ -1,7 +1,3 @@
-# GoDoIt Server Configuration - Production
-# Application-specific settings for production environment
-# Deployment settings (port, database_url) are handled via environment variables
-
 # Logging Configuration
 log_level: "info"
 log_format: "json"

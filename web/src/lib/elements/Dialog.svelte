@@ -1,43 +1,43 @@
 <script lang="ts">
-  import type { HTMLDialogAttributes } from "svelte/elements";
-  import { mrgclx, defstr } from "./util.js";
-  import type { Snippet } from "svelte";
+import type { HTMLDialogAttributes } from "svelte/elements";
+import { mrgclx, defstr } from "./util.js";
+import type { Snippet } from "svelte";
 
-  // #tw-safelist
-  // modal modal-box modal-action modal-backdrop
-  // modal-top modal-middle modal-bottom modal-start modal-end
+// #tw-safelist
+// modal modal-box modal-action modal-backdrop
+// modal-top modal-middle modal-bottom modal-start modal-end
 
-  interface DialogProps extends HTMLDialogAttributes {
-    trigger: Snippet<[onclick: () => void]>;
-    placement?: "top" | "middle" | "bottom" | "start" | "end";
-    content: Snippet<[close: () => void]>;
-  }
+interface DialogProps extends HTMLDialogAttributes {
+	trigger: Snippet<[onclick: () => void]>;
+	placement?: "top" | "middle" | "bottom" | "start" | "end";
+	content: Snippet<[close: () => void]>;
+}
 
-  let {
-    trigger,
-    placement,
-    class: className = "",
-    content,
-    ...restProps
-  }: DialogProps = $props();
+let {
+	trigger,
+	placement,
+	class: className = "",
+	content,
+	...restProps
+}: DialogProps = $props();
 
-  let dialog: HTMLDialogElement | undefined = $state(undefined);
+let dialog: HTMLDialogElement | undefined = $state(undefined);
 
-  let onclick = () => {
-    if (!dialog?.open) {
-      dialog?.showModal();
-    }
-  };
+let onclick = () => {
+	if (!dialog?.open) {
+		dialog?.showModal();
+	}
+};
 
-  let close = () => {
-    if (dialog?.open) {
-      dialog.close();
-    }
-  };
+let close = () => {
+	if (dialog?.open) {
+		dialog.close();
+	}
+};
 
-  const classes = $derived(
-    mrgclx("modal", defstr(placement, `modal-${placement}`), className),
-  );
+const classes = $derived(
+	mrgclx("modal", defstr(placement, `modal-${placement}`), className),
+);
 </script>
 
 {@render trigger(onclick)}

@@ -1,16 +1,16 @@
 <script lang="ts">
-  import Dialog from "$lib/elements/Dialog.svelte";
-  import Nav from "$lib/landing/Nav.svelte";
-  import TerminalButton from "$lib/landing/TerminalButton.svelte";
-  import TerminalPrompt from "$lib/landing/TerminalPrompt.svelte";
-  import { newInboxModel } from "../model.svelte";
-  import type { PageProps } from "./$types";
-  let { data }: PageProps = $props();
+import Dialog from "$lib/elements/Dialog.svelte";
+import Nav from "$lib/landing/Nav.svelte";
+import TerminalButton from "$lib/landing/TerminalButton.svelte";
+import TerminalPrompt from "$lib/landing/TerminalPrompt.svelte";
+import { newInboxModel } from "../model.svelte";
+import type { PageProps } from "./$types";
+let { data }: PageProps = $props();
 
-  let model = newInboxModel(data);
+let model = newInboxModel(data);
 
-  let newPrivateKey = $state("");
-  let newPublicKey = $state("");
+let newPrivateKey = $state("");
+let newPublicKey = $state("");
 </script>
 
 <svelte:head>

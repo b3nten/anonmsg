@@ -1,17 +1,17 @@
 <script lang="ts">
-  import TerminalButton from "$lib/landing/TerminalButton.svelte";
-  import type { MouseEventHandler } from "svelte/elements";
+import TerminalButton from "$lib/landing/TerminalButton.svelte";
+import type { MouseEventHandler } from "svelte/elements";
 
-  let props: {
-    timestamp: number;
-    content: string;
-    delete_msg: MouseEventHandler<HTMLButtonElement>;
-  } = $props();
+let props: {
+	timestamp: number;
+	content: string;
+	delete_msg: MouseEventHandler<HTMLButtonElement>;
+} = $props();
 
-  let date_string = $derived.by(() => {
-    let date = new Date(props.timestamp * 1000);
-    return `${date.getDay()}-${date.getMonth()}-${date.getFullYear()} @ ${date.getHours()}:${date.getMinutes()}`;
-  });
+let date_string = $derived.by(() => {
+	let date = new Date(props.timestamp * 1000);
+	return `${date.getDay()}-${date.getMonth()}-${date.getFullYear()} @ ${date.getHours()}:${date.getMinutes()}`;
+});
 </script>
 
 <div class="bg-black p-2 rounded-lg border border-gray-700">

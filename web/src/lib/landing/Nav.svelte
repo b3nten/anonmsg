@@ -1,75 +1,75 @@
 <script lang="ts">
-  import { env } from "$env/dynamic/public";
-  import { goto } from "$app/navigation";
-  import api from "$lib";
-  import { TerminalButton } from "$lib/landing";
-  import { onMount } from "svelte";
-  import Dialog from "$lib/elements/Dialog.svelte";
+import { env } from "$env/dynamic/public";
+import { goto } from "$app/navigation";
+import api from "$lib";
+import { TerminalButton } from "$lib/landing";
+import { onMount } from "svelte";
+import Dialog from "$lib/elements/Dialog.svelte";
 
-  let mobileMenuOpen = $state(false);
-  let mobileMenuRef: HTMLDivElement | undefined = $state(undefined);
-  let hamburgerButtonRef: HTMLButtonElement | undefined = $state(undefined);
+let mobileMenuOpen = $state(false);
+let mobileMenuRef: HTMLDivElement | undefined = $state(undefined);
+let hamburgerButtonRef: HTMLButtonElement | undefined = $state(undefined);
 
-  let create_inbox = async () => {
-    let response = await api().POST("/v1/inbox/");
-    if (response.error) {
-      alert(response.error.title);
-    } else {
-      goto("/inbox/" + response.data.private_key);
-    }
-  };
+let create_inbox = async () => {
+	let response = await api().POST("/v1/inbox/");
+	if (response.error) {
+		alert(response.error.title);
+	} else {
+		goto("/inbox/" + response.data.private_key);
+	}
+};
 
-  let toggle_mobile_menu = () => {
-    mobileMenuOpen = !mobileMenuOpen;
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-      setTimeout(() => {
-        const firstFocusable = mobileMenuRef?.querySelector("button, a");
-        firstFocusable?.focus();
-      }, 100);
-    } else {
-      document.body.style.overflow = "";
-      hamburgerButtonRef?.focus();
-    }
-  };
+let toggle_mobile_menu = () => {
+	mobileMenuOpen = !mobileMenuOpen;
+	if (mobileMenuOpen) {
+		document.body.style.overflow = "hidden";
+		setTimeout(() => {
+			const firstFocusable = mobileMenuRef?.querySelector("button, a");
+			firstFocusable?.focus();
+		}, 100);
+	} else {
+		document.body.style.overflow = "";
+		hamburgerButtonRef?.focus();
+	}
+};
 
-  let close_mobile_menu = () => {
-    mobileMenuOpen = false;
-    document.body.style.overflow = "";
-    hamburgerButtonRef?.focus();
-  };
+let close_mobile_menu = () => {
+	mobileMenuOpen = false;
+	document.body.style.overflow = "";
+	hamburgerButtonRef?.focus();
+};
 
-  let handle_keydown = (event: KeyboardEvent) => {
-    if (event.key === "Escape" && mobileMenuOpen) {
-      close_mobile_menu();
-    }
+let handle_keydown = (event: KeyboardEvent) => {
+	if (event.key === "Escape" && mobileMenuOpen) {
+		close_mobile_menu();
+	}
 
-    if (mobileMenuOpen && event.key === "Tab") {
-      const focusableElements = mobileMenuRef?.querySelectorAll(
-        'button, a, [tabindex]:not([tabindex="-1"])',
-      );
-      if (focusableElements && focusableElements.length > 0) {
-        const firstElement = focusableElements[0];
-        const lastElement = focusableElements[focusableElements.length - 1];
+	if (mobileMenuOpen && event.key === "Tab") {
+		const focusableElements = mobileMenuRef?.querySelectorAll(
+			'button, a, [tabindex]:not([tabindex="-1"])',
+		);
+		if (focusableElements && focusableElements.length > 0) {
+			const firstElement = focusableElements[0];
+			const lastElement = focusableElements[focusableElements.length - 1];
 
-        if (event.shiftKey && document.activeElement === firstElement) {
-          event.preventDefault();
-          lastElement.focus();
-        } else if (!event.shiftKey && document.activeElement === lastElement) {
-          event.preventDefault();
-          firstElement.focus();
-        }
-      }
-    }
-  };
+			if (event.shiftKey && document.activeElement === firstElement) {
+				event.preventDefault();
+				lastElement.focus();
+			} else if (!event.shiftKey && document.activeElement === lastElement) {
+				event.preventDefault();
+				firstElement.focus();
+			}
+		}
+	}
+};
 
-  onMount(() => {
-    document.addEventListener("keydown", handle_keydown);
-    return () => {
-      document.removeEventListener("keydown", handle_keydown);
-      document.body.style.overflow = "";
-    };
-  });
+onMount(() => {
+	document.addEventListener("keydown", handle_keydown);
+	return () => {
+		document.removeEventListener("keydown", handle_keydown);
+		document.body.style.overflow = "";
+	};
+});
 </script>
 
 <nav class="bg-black border-b border-gray-800 sticky top-0 z-50">

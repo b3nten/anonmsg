@@ -1,19 +1,19 @@
 <script>
-    export let title = "";
-    export let language = "";
-    export let variant = "dark"; // 'dark' | 'darker'
+export let title = "";
+export let language = "";
+export let variant = "dark"; // 'dark' | 'darker'
 
-    $: bgClass = variant === "darker" ? "bg-black" : "bg-neutral-800";
-    $: borderClass =
-        variant === "darker" ? "border-gray-700" : "border-neutral-600";
-    $: languageColor =
-        language === "bash"
-            ? "text-green-400"
-            : language === "json"
-              ? "text-blue-400"
-              : language === "http"
-                ? "text-yellow-400"
-                : "text-purple-400";
+$: bgClass = variant === "darker" ? "bg-black" : "bg-neutral-800";
+$: borderClass =
+	variant === "darker" ? "border-gray-700" : "border-neutral-600";
+$: languageColor =
+	language === "bash"
+		? "text-green-400"
+		: language === "json"
+			? "text-blue-400"
+			: language === "http"
+				? "text-yellow-400"
+				: "text-purple-400";
 </script>
 
 <div class="{bgClass} p-6 rounded-lg border {borderClass}">

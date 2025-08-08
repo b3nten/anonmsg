@@ -1,16 +1,16 @@
 <script lang="ts">
-  import Message from "$lib/inbox/message.svelte";
-  import ApiEndpoint from "$lib/landing/ApiEndpoint.svelte";
-  import Nav from "$lib/landing/Nav.svelte";
-  import TerminalButton from "$lib/landing/TerminalButton.svelte";
-  import TerminalPrompt from "$lib/landing/TerminalPrompt.svelte";
-  import type { PageProps } from "./$types";
-  import { newInboxModel } from "./model.svelte";
-  import { refreshAll } from "$app/navigation";
-  let { data }: PageProps = $props();
-  let model = newInboxModel(data);
+import Message from "$lib/inbox/message.svelte";
+import ApiEndpoint from "$lib/landing/ApiEndpoint.svelte";
+import Nav from "$lib/landing/Nav.svelte";
+import TerminalButton from "$lib/landing/TerminalButton.svelte";
+import TerminalPrompt from "$lib/landing/TerminalPrompt.svelte";
+import type { PageProps } from "./$types";
+import { newInboxModel } from "./model.svelte";
+import { refreshAll } from "$app/navigation";
+let { data }: PageProps = $props();
+let model = newInboxModel(data);
 
-  setInterval(model.refresh.run, 10000);
+setInterval(model.refresh.run, 10000);
 </script>
 
 <svelte:head>

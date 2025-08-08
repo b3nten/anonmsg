@@ -4,7 +4,6 @@ FROM golang:1.24
 RUN go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
 WORKDIR /app
 COPY go.mod go.sum ./
-# RUN go mod download
 COPY . .
 RUN sqlc generate
 EXPOSE 8080

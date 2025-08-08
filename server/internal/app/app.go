@@ -14,12 +14,19 @@ import (
 )
 
 func Run(config cfg.Config) {
-	// connect to database
+	//**************************************************
+	// Establish DB Conn
+	//**************************************************
+
 	db, err := sql.Open("pgx", config.DatabaseURL)
 	if err != nil {
 		panic(err)
 	}
-	// run database migrations
+
+	//**************************************************
+	// Run Migrations
+	//**************************************************
+
 	goose.SetBaseFS(databaseschema.FS)
 	if err := goose.SetDialect("postgres"); err != nil {
 		panic(err)
@@ -27,11 +34,18 @@ func Run(config cfg.Config) {
 	if err := goose.Up(db, "."); err != nil {
 		panic(err)
 	}
-	// init queries
+
+	//**************************************************
+	// Init
+	//**************************************************
+
 	q := database.New(db)
-	// create core Context
 	c := core.NewContext(config, db, q)
-	// start server
+
+	//**************************************************
+	// Start Server!
+	//**************************************************
+
 	fmt.Println("starting server on port", config.Port)
 	server.Run(c)
 }

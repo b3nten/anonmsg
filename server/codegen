@@ -1,2 +1,0 @@
-rm -rf internal/database
-sqlc generate

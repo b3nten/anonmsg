@@ -27,6 +27,10 @@ func Register(parent huma.API, core *core.Context) {
 		op.Tags = []string{"Inbox"}
 	})
 
+	//**************************************************
+	// Create Inbox
+	//**************************************************
+
 	type CreateInboxResponse struct {
 		Body struct {
 			PrivateKey string `json:"private_key"`
@@ -55,6 +59,10 @@ func Register(parent huma.API, core *core.Context) {
 				},
 			}, nil
 		})
+
+	//**************************************************
+	// Get Inbox
+	//**************************************************
 
 	type GetInboxRequest struct {
 		PrivateKey string `path:"private_key"`
@@ -92,6 +100,10 @@ func Register(parent huma.API, core *core.Context) {
 			}}, nil
 		})
 
+	//**************************************************
+	// Delete Inbox
+	//**************************************************
+
 	type DeleteInboxRequest struct {
 		PrivateKey string `path:"private_key"`
 	}
@@ -109,6 +121,10 @@ func Register(parent huma.API, core *core.Context) {
 			}
 			return newGenericMessageResponse("Inbox deleted for " + in.PrivateKey), nil
 		})
+
+	//**************************************************
+	// Set Active Status
+	//**************************************************
 
 	type SetActiveStatusRequest struct {
 		PrivateKey string `path:"private_key"`
@@ -142,6 +158,10 @@ func Register(parent huma.API, core *core.Context) {
 				},
 			}, nil
 		})
+
+	//**************************************************
+	// Get Messages
+	//**************************************************
 
 	type GetMessagesRequest struct {
 		PrivateKey string `path:"private_key"`
@@ -195,6 +215,10 @@ func Register(parent huma.API, core *core.Context) {
 			}}, nil
 		})
 
+	//**************************************************
+	// Set Public Key
+	//**************************************************
+
 	type SetPublicKeyRequest struct {
 		PrivateKey string `path:"private_key"`
 	}
@@ -229,6 +253,10 @@ func Register(parent huma.API, core *core.Context) {
 			}}, nil
 		})
 
+	//**************************************************
+	// Remove Public Key
+	//**************************************************
+
 	type RemovePublicKeyRequest struct {
 		PrivateKey string `path:"private_key"`
 	}
@@ -246,6 +274,10 @@ func Register(parent huma.API, core *core.Context) {
 			}
 			return newGenericMessageResponse("Public key removed successfully"), nil
 		})
+
+	//**************************************************
+	// Delete message
+	//**************************************************
 
 	type DeleteMessageRequest struct {
 		PrivateKey string `path:"private_key"`

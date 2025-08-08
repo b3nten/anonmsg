@@ -14,23 +14,43 @@ import (
 func Run(config *core.Context) {
 	router := http.NewServeMux()
 
+	//**************************************************
+	// Init Huma
+	//**************************************************
+
 	humaCfg := huma.DefaultConfig("App", "1.0.0")
 	humaCfg.DocsPath = ""
 
 	api := humago.New(router, humaCfg)
 	v1 := huma.NewGroup(api, "/v1")
 
+	//**************************************************
+	// Register Services
+	//**************************************************
+
 	inbox.Register(v1, config)
 	messages.Register(v1, config)
+
+	//**************************************************
+	// Init CORS
+	//**************************************************
 
 	c := cors.New(cors.Options{
 		AllowedOrigins: config.AllowedOrigins,
 		AllowedMethods: config.AllowedMethods,
 	})
 
+	//**************************************************
+	// Route Docs
+	//**************************************************
+
 	if config.EnableDocs {
 		router.HandleFunc("GET /docs", serveDocs)
 	}
+
+	//**************************************************
+	// Fin!
+	//**************************************************
 
 	http.ListenAndServe(":"+config.Port, c.Handler(router))
 }
