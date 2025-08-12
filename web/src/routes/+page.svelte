@@ -165,7 +165,7 @@
         <div class="text-green-400">#no account</div>
         <div class="text-red-400">#no tracking</div>
       </TerminalBlock>
-    </TerminalBlock> -->
+    </TerminalBlock>
   </div>
 
   <div class="mt-16 text-center">
