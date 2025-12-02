@@ -16,16 +16,16 @@ let model = getInboxModel();
 <main class="flex flex-col items-center font-mono mt-16 p-4 md:p-8">
   <div class="w-full max-w-5xl space-y-12">
     <div class="mb-12">
-      <div class="text-gray-500">
-        // private_key {model.state.inbox.private_key}
+      <div class="text-gray-300">
+        private_key = {model.state.inbox.private_key}
       </div>
-      <div class="text-gray-500">
-        // public_key {model.state.inbox.public_key.length
+      <div class="text-gray-300">
+        public_key = {model.state.inbox.public_key.length
           ? model.state.inbox.public_key
           : "not set"}
       </div>
-      <div class="text-gray-500">
-        // active {model.state.inbox.active ? "true" : "false"}
+      <div class="text-gray-300">
+        active = {model.state.inbox.active ? "true" : "false"}
       </div>
       <div class="flex w-full items-center justify-between">
         <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">
