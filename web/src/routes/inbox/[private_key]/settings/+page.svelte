@@ -3,14 +3,8 @@ import Dialog from "$lib/elements/Dialog.svelte";
 import Nav from "$lib/landing/Nav.svelte";
 import TerminalButton from "$lib/landing/TerminalButton.svelte";
 import TerminalPrompt from "$lib/landing/TerminalPrompt.svelte";
-import { newInboxModel } from "../model.svelte";
-import type { PageProps } from "./$types";
-let { data }: PageProps = $props();
-
-let model = newInboxModel(data);
-
-let newPrivateKey = $state("");
-let newPublicKey = $state("");
+import { getInboxModel } from "../model.svelte";
+let model = getInboxModel();
 </script>
 
 <svelte:head>
@@ -129,6 +123,7 @@ let newPublicKey = $state("");
                   model.delete_inbox.run(undefined);
                   close();
                 }}
+                class="bg-black! border-red-400"
                 variant="critical"
               >
                 delete_it

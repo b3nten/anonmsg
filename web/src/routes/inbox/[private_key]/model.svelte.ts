@@ -1,8 +1,9 @@
 import api from "$lib";
-import { defineTransaction, Model } from "$lib/state";
 import toast from "svelte-french-toast";
 import type { PageProps } from "./$types";
 import { goto } from "$app/navigation";
+import { getContext, setContext } from "svelte";
+import { defineTransaction, Model } from "horizonstate";
 
 interface InboxModel {
 	inbox: PageProps["data"]["inbox"] & {
@@ -156,9 +157,9 @@ let refresh = defineTransaction<InboxModel>()(
 		let toastPromise = Promise.withResolvers();
 		if (user_triggered) {
 			toast.promise(toastPromise.promise, {
-				loading: "refreshing messages",
-				error: "error refreshing messages",
-				success: "messsages refreshed",
+				loading: "Refreshing messages",
+				error: "Error refreshing messages",
+				success: "Messages refreshed",
 			});
 		}
 
@@ -178,11 +179,11 @@ export let newInboxModel = (props: PageProps["data"]) => {
 		inbox: props.inbox,
 		messages: props.messages ?? [],
 	};
-	let state = $state.raw(initial_state);
-	let model = new Model<InboxModel>(initial_state, {
-		onUpdate(ns) {
-			state = ns;
-		},
+	let state = $state(initial_state);
+	let state2 = $state(null)
+	let model = new Model<InboxModel>(initial_state);
+	model.subscribe((new_state) => {
+		state = new_state
 	});
 	return {
 		get state() {
@@ -196,3 +197,7 @@ export let newInboxModel = (props: PageProps["data"]) => {
 		refresh: model.addTransaction(refresh),
 	};
 };
+
+const MODEL_CONTEXT = Symbol("inbox-model");
+export const getInboxModel = () => getContext<ReturnType<typeof newInboxModel>>(MODEL_CONTEXT);
+export const setInboxModelContext = (model: ReturnType<typeof newInboxModel>) => setContext(MODEL_CONTEXT, model);
